@@ -15,55 +15,95 @@
         app:layout_constraintGuide_percent="0.11" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHSys1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.89" />
+        app:layout_constraintGuide_percent="0.93" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHSys2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.98" />
+        app:layout_constraintGuide_percent="0.99" />
 
     <ImageView
         android:id="@+id/gamesHomeImage"
-        android:layout_width="102dp"
-        android:layout_height="102dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:onClick="goBackToEarth"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/celebrationImage"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineHSys2"
         app:srcCompat="@drawable/zz_games_home" />
 
     <ImageView
+        android:id="@+id/celebrationDoor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideline5.5"
+        app:layout_constraintEnd_toEndOf="@id/guideline6.5"
+        app:layout_constraintBottom_toTopOf="@id/guideline4"
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        app:srcCompat="@drawable/zz_door_celebration" />
+
+    <ImageView
         android:id="@+id/celebrationImage"
-        android:layout_width="368dp"
-        android:layout_height="526dp"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@id/guidelineHSys1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintEnd_toEndOf="@id/guideline6"
+        app:layout_constraintBottom_toTopOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/zz_celebration" />
 
 

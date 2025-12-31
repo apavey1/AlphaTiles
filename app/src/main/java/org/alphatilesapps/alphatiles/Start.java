@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,7 +67,7 @@ public class Start extends AppCompatActivity {
     public static Boolean hasSyllableAudio;
     public static Boolean enhancedAudioLoadingLog;
     public static Boolean hasSyllableGames = false;
-    public static int after12checkedTrackers;
+    public static int after12checkedTrackers = 3;
     public static Boolean differentiatesTileTypes;
     public static Boolean hasSAD = false;
     public static double stageCorrespondenceRatio;
@@ -248,7 +249,7 @@ public class Start extends AppCompatActivity {
     }
 
     private void buildColorList() {
-        Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_colors));
+      Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_colors));
 
         boolean header = true;
 
@@ -271,106 +272,156 @@ public class Start extends AppCompatActivity {
         gameSounds = null;
     }
     public void buildTileList() {
-        // KP, Oct 2020
-        // AH Nov 2020, updated by AH to allow for spaces in fields (some common nouns in some languages have spaces
-        // AH Mar 2021, add new column for audio tile and for upper case tile
-
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_gametiles));
         boolean header = true;
         tileList = new TileList();
         tileListNoSAD = new TileList();
 
-        while (scanner.hasNext()) {
-            String thisLine = scanner.nextLine();
-            String[] thisLineArray = thisLine.split("\t");
-            if (header) {
-                tileList.baseTitle = thisLineArray[0];
-                tileList.alt1Title = thisLineArray[1];
-                tileList.alt2Title = thisLineArray[2];
-                tileList.alt3Title = thisLineArray[3];
-                tileList.tileTypeTitle = thisLineArray[4];
-                tileList.audioForTileTitle = thisLineArray[5];
-                tileList.upperTileTitle = thisLineArray[6];
-                tileList.tileTypeBTitle = thisLineArray[7];
-                tileList.audioForTileBTitle = thisLineArray[8];
-                tileList.tileTypeCTitle = thisLineArray[9];
-                tileList.audioForTileCTitle = thisLineArray[10];
-                tileList.iconicWordTitle = thisLineArray[11];
-                tileList.tileColorTitle = thisLineArray[12];
-                tileList.tileDuration3Title = "";
-                tileList.stageOfFirstAppearanceTitle = thisLineArray[14];
-                tileList.stageOfFirstAppearanceTitleType2 = thisLineArray[15];
-                tileList.stageOfFirstAppearanceTitleType3 = thisLineArray[16];
+        while (scanner.hasNextLine()) {
+            String thisLine = scanner.nextLine().trim();
+            if (thisLine.isEmpty()) continue; // skip empty lines
 
+            String[] thisLineArray = thisLine.split("\t");
+
+            if (header) {
+                // Assign header titles safely
+                tileList.baseTitle = thisLineArray.length > 0 ? thisLineArray[0] : "";
+                tileList.alt1Title = thisLineArray.length > 1 ? thisLineArray[1] : "";
+                tileList.alt2Title = thisLineArray.length > 2 ? thisLineArray[2] : "";
+                tileList.alt3Title = thisLineArray.length > 3 ? thisLineArray[3] : "";
+                tileList.tileTypeTitle = thisLineArray.length > 4 ? thisLineArray[4] : "";
+                tileList.audioForTileTitle = thisLineArray.length > 5 ? thisLineArray[5] : "";
+                tileList.upperTileTitle = thisLineArray.length > 6 ? thisLineArray[6] : "";
+                tileList.tileTypeBTitle = thisLineArray.length > 7 ? thisLineArray[7] : "";
+                tileList.audioForTileBTitle = thisLineArray.length > 8 ? thisLineArray[8] : "";
+                tileList.tileTypeCTitle = thisLineArray.length > 9 ? thisLineArray[9] : "";
+                tileList.audioForTileCTitle = thisLineArray.length > 10 ? thisLineArray[10] : "";
+                tileList.iconicWordTitle = thisLineArray.length > 11 ? thisLineArray[11] : "";
+                tileList.tileColorTitle = thisLineArray.length > 12 ? thisLineArray[12] : "";
+                tileList.tileDuration3Title = "";
+                tileList.stageOfFirstAppearanceTitle = thisLineArray.length > 14 ? thisLineArray[14] : "1";
+                tileList.stageOfFirstAppearanceTitleType2 = thisLineArray.length > 15 ? thisLineArray[15] : "1";
+                tileList.stageOfFirstAppearanceTitleType3 = thisLineArray.length > 16 ? thisLineArray[16] : "1";
                 header = false;
             } else {
+                // Ensure we have defaults for stage values
+                int stageOfFirstAppearance = 1;
+                int stageOfFirstAppearanceType2 = 1;
+                int stageOfFirstAppearanceType3 = 1;
 
-                // Sort information for staged introduction, including among potential second or third types of a tile
-                int stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3;
-                if(!thisLineArray[14].matches("[0-9]+")) { // Add all first types of tiles to "stage 1" if stages aren't being used
-                    stageOfFirstAppearance = 1;
-                } else {
-                    stageOfFirstAppearance = Integer.parseInt(thisLineArray[14]);
-                    if (!(stageOfFirstAppearance >= 1 && stageOfFirstAppearance <= 7)) {
-                        stageOfFirstAppearance = 1;
-                    }
+                if (thisLineArray.length > 14 && thisLineArray[14].matches("\\d+")) {
+                    int val = Integer.parseInt(thisLineArray[14]);
+                    if (val >= 1 && val <= 7) stageOfFirstAppearance = val;
                 }
-                if(!thisLineArray[15].matches("[0-9]+")) {
-                    stageOfFirstAppearanceType2 = 1;
-                } else {
-                    stageOfFirstAppearanceType2 = Integer.parseInt(thisLineArray[15]);
-                    if (!(stageOfFirstAppearanceType2 >= 1 && stageOfFirstAppearanceType2 <= 7)) {
-                        stageOfFirstAppearance = 1;
-                    }
+
+                if (thisLineArray.length > 15 && thisLineArray[15].matches("\\d+")) {
+                    int val = Integer.parseInt(thisLineArray[15]);
+                    if (val >= 1 && val <= 7) stageOfFirstAppearanceType2 = val;
                 }
-                if(!thisLineArray[16].matches("[0-9]+")) {
-                    stageOfFirstAppearanceType3 = 1;
-                } else {
-                    stageOfFirstAppearanceType3 = Integer.parseInt(thisLineArray[16]);
-                    if (!(stageOfFirstAppearanceType3 >= 1 && stageOfFirstAppearanceType3 <= 7)) {
-                        stageOfFirstAppearance = 1;
-                    }
+
+                if (thisLineArray.length > 16 && thisLineArray[16].matches("\\d+")) {
+                    int val = Integer.parseInt(thisLineArray[16]);
+                    if (val >= 1 && val <= 7) stageOfFirstAppearanceType3 = val;
                 }
-                // Create tile(s) and add to list; may add up to three tiles from the same line if it has multiple types
+
+                // Prepare distractors safely
                 ArrayList<String> distractors = new ArrayList<>();
-                distractors.add(thisLineArray[1]);
-                distractors.add(thisLineArray[2]);
-                distractors.add(thisLineArray[3]);
-                Tile tile = new Tile(thisLineArray[0], distractors, thisLineArray[4], thisLineArray[5], thisLineArray[6],thisLineArray[7], thisLineArray[8], thisLineArray[9], thisLineArray[10],thisLineArray[11], 0, 0,stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,thisLineArray[4], stageOfFirstAppearance, thisLineArray[5]);
+                distractors.add(thisLineArray.length > 1 ? thisLineArray[1] : "");
+                distractors.add(thisLineArray.length > 2 ? thisLineArray[2] : "");
+                distractors.add(thisLineArray.length > 3 ? thisLineArray[3] : "");
+
+                // Create main tile
+                Tile tile = new Tile(
+                        thisLineArray.length > 0 ? thisLineArray[0] : "",
+                        distractors,
+                        thisLineArray.length > 4 ? thisLineArray[4] : "",
+                        thisLineArray.length > 5 ? thisLineArray[5] : "",
+                        thisLineArray.length > 6 ? thisLineArray[6] : "",
+                        thisLineArray.length > 7 ? thisLineArray[7] : "",
+                        thisLineArray.length > 8 ? thisLineArray[8] : "",
+                        thisLineArray.length > 9 ? thisLineArray[9] : "",
+                        thisLineArray.length > 10 ? thisLineArray[10] : "",
+                        thisLineArray.length > 11 ? thisLineArray[11] : "",
+                        0, 0,
+                        stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,
+                        thisLineArray.length > 4 ? thisLineArray[4] : "",
+                        stageOfFirstAppearance,
+                        thisLineArray.length > 5 ? thisLineArray[5] : ""
+                );
+
                 if (!tile.hasNull()) {
                     tileList.add(tile);
                     if (!tile.typeOfThisTileInstance.equals("SAD") && !(tile.audioForThisTileType.equals("zz_no_audio_needed") && !tile.typeOfThisTileInstance.equals("PC"))) {
-                        tileListNoSAD.add(tile); // placeholder consonants may be added even if they don't have audio
+                        tileListNoSAD.add(tile);
                     }
                 }
-                if(!tile.tileTypeB.equals("none")){
-                    tile = new Tile(thisLineArray[0], distractors, thisLineArray[4], thisLineArray[5], thisLineArray[6],thisLineArray[7], thisLineArray[8], thisLineArray[9], thisLineArray[10],thisLineArray[11], 0, 0,stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,thisLineArray[7], stageOfFirstAppearanceType2, thisLineArray[8]);
+
+                // Repeat for typeB
+                if (thisLineArray.length > 7 && !thisLineArray[7].equals("none")) {
+                    tile = new Tile(
+                            thisLineArray.length > 0 ? thisLineArray[0] : "",
+                            distractors,
+                            thisLineArray.length > 4 ? thisLineArray[4] : "",
+                            thisLineArray.length > 5 ? thisLineArray[5] : "",
+                            thisLineArray.length > 6 ? thisLineArray[6] : "",
+                            thisLineArray[7],
+                            thisLineArray.length > 8 ? thisLineArray[8] : "",
+                            thisLineArray.length > 9 ? thisLineArray[9] : "",
+                            thisLineArray.length > 10 ? thisLineArray[10] : "",
+                            thisLineArray.length > 11 ? thisLineArray[11] : "",
+                            0, 0,
+                            stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,
+                            thisLineArray[7],
+                            stageOfFirstAppearanceType2,
+                            thisLineArray.length > 8 ? thisLineArray[8] : ""
+                    );
                     if (!tile.hasNull()) {
                         tileList.add(tile);
                         if (!tile.typeOfThisTileInstance.equals("SAD") && !(tile.audioForThisTileType.equals("zz_no_audio_needed") && !tile.typeOfThisTileInstance.equals("PC"))) {
-                            tileListNoSAD.add(tile); // placeholder consonants may be added even if they don't have audio
+                            tileListNoSAD.add(tile);
                         }
                     }
                 }
-                if(!tile.tileTypeC.equals("none")){
-                    tile = new Tile(thisLineArray[0], distractors, thisLineArray[4], thisLineArray[5], thisLineArray[6],thisLineArray[7], thisLineArray[8], thisLineArray[9], thisLineArray[10],thisLineArray[11], 0, 0,stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,thisLineArray[9], stageOfFirstAppearanceType3, thisLineArray[10]);
+
+                // Repeat for typeC
+                if (thisLineArray.length > 9 && !thisLineArray[9].equals("none")) {
+                    tile = new Tile(
+                            thisLineArray.length > 0 ? thisLineArray[0] : "",
+                            distractors,
+                            thisLineArray.length > 4 ? thisLineArray[4] : "",
+                            thisLineArray.length > 5 ? thisLineArray[5] : "",
+                            thisLineArray.length > 6 ? thisLineArray[6] : "",
+                            thisLineArray.length > 7 ? thisLineArray[7] : "",
+                            thisLineArray.length > 8 ? thisLineArray[8] : "",
+                            thisLineArray[9],
+                            thisLineArray.length > 10 ? thisLineArray[10] : "",
+                            thisLineArray.length > 11 ? thisLineArray[11] : "",
+                            0, 0,
+                            stageOfFirstAppearance, stageOfFirstAppearanceType2, stageOfFirstAppearanceType3,
+                            thisLineArray[9],
+                            stageOfFirstAppearanceType3,
+                            thisLineArray.length > 10 ? thisLineArray[10] : ""
+                    );
                     if (!tile.hasNull()) {
                         tileList.add(tile);
                         if (!tile.typeOfThisTileInstance.equals("SAD") && !(tile.audioForThisTileType.equals("zz_no_audio_needed") && !tile.typeOfThisTileInstance.equals("PC"))) {
-                            tileListNoSAD.add(tile); // placeholder consonants may be added even if they don't have audio
+                            tileListNoSAD.add(tile);
                         }
                     }
                 }
             }
         }
+
+        // Populate silent placeholders
         for (Tile thisTile : tileList) {
-            if(thisTile.audioForThisTileType.equals("zz_no_audio_needed") && thisTile.typeOfThisTileInstance.equals("PC")) {
+            if (thisTile.audioForThisTileType.equals("zz_no_audio_needed") && thisTile.typeOfThisTileInstance.equals("PC")) {
                 SILENT_PLACEHOLDER_CONSONANTS.add(thisTile);
             }
-            if(thisTile.audioForThisTileType.equals("zz_no_audio_needed") && !thisTile.typeOfThisTileInstance.equals("PC")) {
+            if (thisTile.audioForThisTileType.equals("zz_no_audio_needed") && !thisTile.typeOfThisTileInstance.equals("PC")) {
                 SILENT_PRELIMINARY_TILES.add(thisTile);
             }
         }
+
         buildTileHashMap();
     }
 
@@ -445,24 +496,43 @@ public class Start extends AppCompatActivity {
     }
 
     public void buildWordList() {
-        // KP, Oct 2020 (updated by AH to allow for spaces in fields (some common nouns in some languages have spaces)
+        // KP, Oct 2020
+        // AH update: safe handling of missing columns and spaces in fields
 
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_wordlist));
         boolean header = true;
         wordList = new WordList();
-        while (scanner.hasNext()) {
-            String thisLine = scanner.nextLine();
-            String[] thisLineArray = thisLine.split("\t");
+
+        while (scanner.hasNextLine()) {
+            String thisLine = scanner.nextLine().trim();
+            if (thisLine.isEmpty()) continue; // skip empty lines
+
+            String[] thisLineArray = thisLine.split("\t", -1); // keep empty strings for missing columns
+
             if (header) {
-                wordList.wordInLWCTitle = thisLineArray[0];
-                wordList.wordInLOPTitle = thisLineArray[1];
-                wordList.durationTitle = thisLineArray[2];
-                wordList.mixedDefsTitle = thisLineArray[3];
-                wordList.adjustmentTitle = ""; //set during LoadingScreen activity
-                wordList.stageOfFirstAppearanceTitle = thisLineArray[5];
+                wordList.wordInLWCTitle = thisLineArray.length > 0 ? thisLineArray[0] : "";
+                wordList.wordInLOPTitle = thisLineArray.length > 1 ? thisLineArray[1] : "";
+                wordList.durationTitle = thisLineArray.length > 2 ? thisLineArray[2] : "";
+                wordList.mixedDefsTitle = thisLineArray.length > 3 ? thisLineArray[3] : "";
+                wordList.adjustmentTitle = ""; // set during LoadingScreen activity
+                wordList.stageOfFirstAppearanceTitle = thisLineArray.length > 5 ? thisLineArray[5] : "";
                 header = false;
             } else {
-                Word word = new Word(thisLineArray[0], thisLineArray[1], Integer.parseInt(thisLineArray[2]), thisLineArray[3], "", thisLineArray[5]);
+                String wordLWC = thisLineArray.length > 0 ? thisLineArray[0] : "";
+                String wordLOP = thisLineArray.length > 1 ? thisLineArray[1] : "";
+                int duration = 0;
+                if (thisLineArray.length > 2) {
+                    try {
+                        duration = Integer.parseInt(thisLineArray[2]);
+                    } catch (NumberFormatException e) {
+                        duration = 0; // default if parsing fails
+                    }
+                }
+                String mixedDefs = thisLineArray.length > 3 ? thisLineArray[3] : "";
+                String adjustment = ""; // still empty
+                String stage = thisLineArray.length > 5 ? thisLineArray[5] : "";
+
+                Word word = new Word(wordLWC, wordLOP, duration, mixedDefs, adjustment, stage);
                 if (!word.hasNull()) {
                     wordList.add(word);
                 }
@@ -638,25 +708,44 @@ public class Start extends AppCompatActivity {
     }
 
     public void buildKeyList() {
-        // KP, Oct 2020
-        // AH, Nov 2020, updates to add second column (color theme)
-        // AH Nov 2020, updated by AH to allow for spaces in fields (some common nouns in some languages have spaces
-
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_keyboard)); // prep scan of aa_keyboard.txt
         boolean header = true;
         keyList = new KeyList();
-        while (scanner.hasNext()) {
-            String thisLine = scanner.nextLine();
+
+        while (scanner.hasNextLine()) {
+            String thisLine = scanner.nextLine().trim();
+
+            // skip empty lines
+            if (thisLine.isEmpty()) {
+                continue;
+            }
+
             String[] thisLineArray = thisLine.split("\t");
+
+            // handle header row
             if (header) {
-                keyList.keysTitle = thisLineArray[0];
-                keyList.colorTitle = thisLineArray[1];
+                if (thisLineArray.length >= 2) {
+                    keyList.keysTitle = thisLineArray[0];
+                    keyList.colorTitle = thisLineArray[1];
+                } else if (thisLineArray.length == 1) {
+                    keyList.keysTitle = thisLineArray[0];
+                    keyList.colorTitle = ""; // default empty
+                } else {
+                    keyList.keysTitle = "";
+                    keyList.colorTitle = "";
+                }
                 header = false;
-            } else {
+                continue;
+            }
+
+            // only add key if we have at least 2 columns
+            if (thisLineArray.length >= 2) {
                 Key key = new Key(thisLineArray[0], thisLineArray[1]);
                 if (!key.hasNull()) {
                     keyList.add(key);
                 }
+            } else {
+                Log.w("buildKeyList", "Skipping malformed line: " + thisLine);
             }
         }
     }
@@ -666,25 +755,40 @@ public class Start extends AppCompatActivity {
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_games)); // prep scan of aa_games.txt
         boolean header = true;
         gameList = new GameList();
-        while (scanner.hasNext()) {
-            String thisLine = scanner.nextLine();
-            String[] thisLineArray = thisLine.split("\t");
+
+        while (scanner.hasNextLine()) {
+            String thisLine = scanner.nextLine().trim();
+            if (thisLine.isEmpty()) continue; // skip empty lines
+
+            String[] thisLineArray = thisLine.split("\t", -1); // preserve empty columns
+
             if (header) {
-                gameList.gameNumberTitle = thisLineArray[0];
-                gameList.gameCountryTitle = thisLineArray[1];
-                gameList.gameLevelTitle = thisLineArray[2];
-                gameList.gameColorTitle = thisLineArray[3];
-                gameList.gameInstrLabelTitle = thisLineArray[4];
-                gameList.gameInstrDurationTitle = thisLineArray[5];
-                gameList.gameModeTitle = thisLineArray[6];
-                gameList.gameStageTitle = thisLineArray[7];
+                gameList.gameNumberTitle = thisLineArray.length > 0 ? thisLineArray[0] : "";
+                gameList.gameCountryTitle = thisLineArray.length > 1 ? thisLineArray[1] : "";
+                gameList.gameLevelTitle = thisLineArray.length > 2 ? thisLineArray[2] : "";
+                gameList.gameColorTitle = thisLineArray.length > 3 ? thisLineArray[3] : "";
+                gameList.gameInstrLabelTitle = thisLineArray.length > 4 ? thisLineArray[4] : "";
+                gameList.gameInstrDurationTitle = thisLineArray.length > 5 ? thisLineArray[5] : "";
+                gameList.gameModeTitle = thisLineArray.length > 6 ? thisLineArray[6] : "";
+                gameList.gameStageTitle = thisLineArray.length > 7 ? thisLineArray[7] : "";
                 header = false;
             } else {
-                Game game = new Game(thisLineArray[0], thisLineArray[1], thisLineArray[2], thisLineArray[3], thisLineArray[4], thisLineArray[5], thisLineArray[6], thisLineArray[7]);
+                // safely assign values or empty strings if missing
+                String col0 = thisLineArray.length > 0 ? thisLineArray[0] : "";
+                String col1 = thisLineArray.length > 1 ? thisLineArray[1] : "";
+                String col2 = thisLineArray.length > 2 ? thisLineArray[2] : "";
+                String col3 = thisLineArray.length > 3 ? thisLineArray[3] : "";
+                String col4 = thisLineArray.length > 4 ? thisLineArray[4] : "";
+                String col5 = thisLineArray.length > 5 ? thisLineArray[5] : "";
+                String col6 = thisLineArray.length > 6 ? thisLineArray[6] : "";
+                String col7 = thisLineArray.length > 7 ? thisLineArray[7] : "";
+
+                Game game = new Game(col0, col1, col2, col3, col4, col5, col6, col7);
                 if (!game.hasNull()) {
                     gameList.add(game);
                 }
-                if (thisLineArray[6].equals("S")) { //JP
+
+                if (col6.equals("S")) { //JP
                     hasSyllableGames = true;
                 }
             }
@@ -699,13 +803,21 @@ public class Start extends AppCompatActivity {
         settingsList = new SettingsList();
         while (scanner.hasNext()) {
             if (scanner.hasNextLine()) {
+                String thisLine = scanner.nextLine().trim();
+                if (thisLine.isEmpty()) continue; // skip empty lines
+
                 if (header) {
-                    settingsList.title = scanner.nextLine();
+                    settingsList.title = thisLine;
                     header = false;
                 } else {
-                    String thisLine = scanner.nextLine();
                     String[] thisLineArray = thisLine.split("\t");
-                    settingsList.put(thisLineArray[0], thisLineArray[1]);
+                    if (thisLineArray.length >= 2) {
+                        settingsList.put(thisLineArray[0], thisLineArray[1]);
+                    } else if (thisLineArray.length == 1) {
+                        settingsList.put(thisLineArray[0], ""); // fill missing second column with empty string
+                    } else {
+                        Log.w("buildSettingsList", "Skipping malformed line: " + thisLine);
+                    }
                 }
             }
         }
@@ -714,36 +826,49 @@ public class Start extends AppCompatActivity {
         if (placeholderCharacter.equals("")) {
             placeholderCharacter = " ";
         }
-
     }
 
     public void buildLangInfoList() {
-
-        boolean header = true;
         Scanner scanner = new Scanner(getResources().openRawResource(R.raw.aa_langinfo)); // prep scan of aa_langinfo.txt
-
+        boolean header = true;
         langInfoList = new LangInfoList();
-        while (scanner.hasNext()) {
-            if (scanner.hasNextLine()) {
-                if (header) {
-                    langInfoList.title = scanner.nextLine();
-                    header = false;
+
+        while (scanner.hasNextLine()) {
+            String thisLine = scanner.nextLine().trim();
+
+            // skip empty lines
+            if (thisLine.isEmpty()) {
+                continue;
+            }
+
+            String[] thisLineArray = thisLine.split("\t");
+
+            // handle header row
+            if (header) {
+                if (thisLineArray.length >= 1) {
+                    langInfoList.title = thisLineArray[0];
                 } else {
-                    String thisLine = scanner.nextLine();
-                    String[] thisLineArray = thisLine.split("\t");
-                    langInfoList.put(thisLineArray[0], thisLineArray[1]);
+                    langInfoList.title = "";
                 }
+                header = false;
+                continue;
+            }
+
+            // make sure we have at least 2 columns before adding
+            if (thisLineArray.length >= 2) {
+                langInfoList.put(thisLineArray[0], thisLineArray[1]);
+            } else {
+                Log.w("buildLangInfoList", "Skipping malformed line: " + thisLine);
             }
         }
 
         localAppName = langInfoList.find("Game Name");
-        scriptType = langInfoList.find("Script type"); // If "Thai", "Lao", "Khmer", or "Arabic", special tile parsing occurs
+        scriptType = langInfoList.find("Script type");
 
         String localWordForName = langInfoList.find("NAME in local language");
-        if (localWordForName.equals("custom")) {
+        if ("custom".equals(localWordForName)) {
             buildAvatarNameList();
         }
-
     }
 
     public void buildAvatarNameList() {

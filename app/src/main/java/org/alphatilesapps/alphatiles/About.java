@@ -33,44 +33,12 @@ public class About extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = this;
 
-        setContentView(R.layout.about);
-
-        ActivityLayouts.applyEdgeToEdge(this, R.id.aboutCL);
+        setContentView(R.layout.about);        ActivityLayouts.applyEdgeToEdge(this, R.id.aboutCL);
         ActivityLayouts.setStatusAndNavColors(this);
-
-        TextView localName = findViewById(R.id.gameNameInLOP);
-        localName.setText(Start.localAppName);
-        TextView lgNamesPlusCountry = findViewById(R.id.langNamesPlusCountry);
-        if (Start.langInfoList.find("Lang Name (In Local Lang)").equals(Start.langInfoList.find("Lang Name (In English)"))) {
-            lgNamesPlusCountry.setText(context.getString(R.string.names_plus_countryB,
-                    Start.langInfoList.find("Lang Name (In Local Lang)"),
-                    Start.langInfoList.find("Lang Name (In English)"),
-                    Start.langInfoList.find("Country"))); // RR, KP
-        } else {
-            lgNamesPlusCountry.setText(context.getString(R.string.names_plus_countryA,
-                    Start.langInfoList.find("Lang Name (In Local Lang)"),
-                    Start.langInfoList.find("Lang Name (In English)"),
-                    Start.langInfoList.find("Country"))); // RR, KP
-        }
 
         TextView photoAudioCredits = findViewById(R.id.photoAudioCredits);
         photoAudioCredits.setText(Start.langInfoList.find("Audio and image credits"));
         photoAudioCredits.setMovementMethod(new ScrollingMovementMethod());
-
-        TextView photoAudioCredits2 = findViewById(R.id.photoAudioCredits2);
-        String mediaTwo = Start.langInfoList.find("Audio and image credits (lang 2)");
-        if (mediaTwo != null && !mediaTwo.equalsIgnoreCase("none") && !mediaTwo.isEmpty()) {
-            photoAudioCredits2.setText("");
-        } else {
-            photoAudioCredits2.setText(mediaTwo);
-            photoAudioCredits2.setMovementMethod(new ScrollingMovementMethod());
-            ConstraintLayout constraintLayout = findViewById(R.id.aboutCL);
-            ConstraintSet constraintSet = new ConstraintSet();
-            constraintSet.clone(constraintLayout);
-            constraintSet.connect(photoAudioCredits.getId(),ConstraintSet.BOTTOM,R.id.guidelineH8,ConstraintSet.TOP,0);
-//            constraintSet.connect(R.id.guidelineH7,ConstraintSet.TOP,R.id.guidelineH8,ConstraintSet.BOTTOM,0);
-            constraintSet.applyTo(constraintLayout);
-        }
 
         TextView email = findViewById(R.id.email);
         String contactEmail = Start.langInfoList.find("Email");
@@ -90,7 +58,7 @@ public class About extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             styledText = Html.fromHtml(linkText, Html.FROM_HTML_MODE_LEGACY);
         } else {
-            styledText = Html.fromHtml(linkText); // for API 21 to 23
+            styledText = Html.fromHtml(linkText);
         }
         privacyPolicy.setText(styledText);
         privacyPolicy.setMovementMethod(LinkMovementMethod.getInstance());
@@ -112,38 +80,21 @@ public class About extends AppCompatActivity {
             forceLTRIfSupported();
         }
 
-        if (!hideSILlogoSetting.equals("")) {
+        // SIMPLIFIED LOGIC: Just hide the view if needed, don't move other things
+        if (!hideSILlogoSetting.equals("0")) {
             hideSILlogo = Boolean.parseBoolean(hideSILlogoSetting);
-
             if (hideSILlogo) {
-
                 ImageView SILlogoImage = findViewById(R.id.logoSILImage);
-                SILlogoImage.setVisibility(View.GONE);
-
-                ConstraintLayout constraintLayout = findViewById(R.id.aboutCL);
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(constraintLayout);
-                constraintSet.centerHorizontally(R.id.gamesHomeImage, R.id.aboutCL);
-                constraintSet.applyTo(constraintLayout);
+                if(SILlogoImage != null) SILlogoImage.setVisibility(View.GONE);
             }
-        } else {//default
-            hideSILlogo = false;
         }
 
+        // SIMPLIFIED LOGIC: Just hide the view if needed, don't move other things
         int resID = context.getResources().getIdentifier("zzz_about", "raw", context.getPackageName());
         if (resID == 0) {
-            // hide audio instructions icon
             ImageView instructionsButton = findViewById(R.id.instructions);
-            instructionsButton.setVisibility(View.GONE);
-
-            ConstraintLayout constraintLayout = findViewById(R.id.aboutCL);
-            ConstraintSet constraintSet = new ConstraintSet();
-            constraintSet.clone(constraintLayout);
-            constraintSet.connect(R.id.gamesHomeImage, ConstraintSet.END, R.id.logoSILImage, ConstraintSet.START, 0);
-            constraintSet.connect(R.id.logoSILImage, ConstraintSet.START, R.id.gamesHomeImage, ConstraintSet.END, 0);
-            constraintSet.applyTo(constraintLayout);
+            if(instructionsButton != null) instructionsButton.setVisibility(View.GONE);
         }
-
     }
 
     public void goBackToEarth(View view) {

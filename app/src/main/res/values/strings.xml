@@ -287,4 +287,6 @@
 
     <string name="expiration_dialog_message">This app has expired.</string>
     <string name="expiration_dialog_title">Expired</string>
+
+    <string name="app_name">Ako Sipela</string>
 </resources>

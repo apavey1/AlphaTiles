@@ -482,7 +482,7 @@
         android:onClick="goBackToEarth"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
         app:layout_constraintStart_toStartOf="@+id/bottomGamesHomeSpacer"
-        app:layout_constraintEnd_toEndOf="@+id/bottomGamesHomeSpacer"
+        app:layout_constraintEnd_toEndOf="@+id/bottomInstructionsSpacer"
         app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
         android:contentDescription="@+id/gamesHomeImage"
         app:srcCompat="@drawable/zz_games_home" />
@@ -502,11 +502,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="playAudioInstructions"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
-        app:layout_constraintEnd_toEndOf="@+id/bottomInstructionsSpacer"
-        app:layout_constraintStart_toStartOf="@+id/bottomInstructionsSpacer"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
-        android:contentDescription="@+id/playInstructionAudio"
         android:rotationY="0"
         app:srcCompat="@drawable/zz_instructions" />
 
@@ -627,13 +622,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.99" />
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

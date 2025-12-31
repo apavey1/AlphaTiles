@@ -35,9 +35,8 @@ public class Earth extends AppCompatActivity {
     char grade;
     int pageNumber; // Games 001 to 033 are displayed on page 1, games 034 to 066 are displayed on page 2, etc.
     int globalPoints;
-    int doorsPerPage = 33;
+    int doorsPerPage = 35;
     ConstraintLayout earthCL;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,8 @@ public class Earth extends AppCompatActivity {
         }
 
         SharedPreferences prefs = getSharedPreferences(ChoosePlayer.SHARED_PREFS, MODE_PRIVATE);
-        globalPoints = getIntent().getIntExtra("globalPoints", 0);
+        String playerGlobalPointsKey = "storedPoints_player" + playerString;
+        globalPoints = prefs.getInt(playerGlobalPointsKey, 0);
 
         TextView pointsEarned = findViewById(R.id.pointsTextView);
         pointsEarned.setText(String.valueOf(globalPoints));
@@ -139,12 +139,7 @@ public class Earth extends AppCompatActivity {
                 noShareIcon = true;
             }
         }
-        if (noShareIcon) { // if aa_share does not have a second line, don't display a share icon
-            //if (true) {
-            ImageView shareIcon = findViewById(R.id.share);
-            shareIcon.setVisibility(View.GONE);
-            shareIcon.setOnClickListener(null);
-        }
+
         boolean noResources = true;
         if (context.getResources().getIdentifier("aa_resources", "raw", context.getPackageName()) != 0) { // Checks if resource file exists
             Scanner resourceScanner = new Scanner(getResources().openRawResource(R.raw.aa_resources));
@@ -167,17 +162,31 @@ public class Earth extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(ChoosePlayer.SHARED_PREFS, MODE_PRIVATE);
         int trackerCount;
 
-        for (int j = 0; j < earthCL.getChildCount(); j++) {
-            View child = earthCL.getChildAt(j);
+        for (int j = 0; j < earthCL.getChildCount(); j++) {View child = earthCL.getChildAt(j);
             if (child instanceof TextView && child.getTag() != null) {
                 try {
-                    int doorIndex = Integer.parseInt((String) earthCL.getChildAt(j).getTag()) - 1;
+                    int doorIndex = Integer.parseInt((String) child.getTag()) - 1;
                     String doorText = String.valueOf((pageNumber * doorsPerPage) + doorIndex + 1);
                     ((TextView) child).setText(doorText);
+
                     if (((pageNumber * doorsPerPage) + doorIndex) >= Start.gameList.size()) {
                         ((TextView) child).setVisibility(View.INVISIBLE);
+                        continue; // Skip doors that don't correspond to a game
+                    }
+
+                    // ========== START OF CONSOLIDATED LOGIC ==========
+
+                    int absoluteGameNumber = (pageNumber * doorsPerPage) + doorIndex + 1;
+                    String doorStyle;
+
+                    // 1. Decide the style based on the game type (tutorial vs. normal)
+                    if (absoluteGameNumber >= 1 && absoluteGameNumber <= 3) {
+                        // This is a TUTORIAL door
+                        doorStyle = "_tutorial"; // Will build "zz_door_tutorial"
+                        ((TextView) child).setTextColor(Color.parseColor("#000000")); // SET TEXT TO BLACK
+
                     } else {
-                        String project = "org.alphatilesapps.alphatiles.";
+                        // This is a NORMAL door, use the completion logic
                         String country = Start.gameList.get((pageNumber * doorsPerPage) + doorIndex).country;
                         String challengeLevel = Start.gameList.get((pageNumber * doorsPerPage) + doorIndex).level;
                         String syllableGame = gameList.get((pageNumber * doorsPerPage) + doorIndex).mode;
@@ -187,74 +196,61 @@ public class Earth extends AppCompatActivity {
                         } else {
                             stage = gameList.get((pageNumber * doorsPerPage) + doorIndex).stage;
                         }
+                        String project = "org.alphatilesapps.alphatiles.";
                         String uniqueGameLevelPlayerModeStageID = project + country + challengeLevel + playerString + syllableGame + stage;
-
                         trackerCount = prefs.getInt(uniqueGameLevelPlayerModeStageID + "_trackerCount", 0);
 
-                        // This is currently the only game that has no right/wrong responses with an incrementing trackerCount variable
-                        // So we are forcing this game's door to initialize with a start
-                        // This code is in two places
-                        // If other "no right or wrong" games are added, probably better to add a new column in aa_games.txt with a classification
-                        if (country.equals("Romania") || country.equals("Sudan") || country.equals("Malaysia")|| country.equals("Iraq")) {                            trackerCount = 12;
-                            ((TextView) child).setTextColor(Color.parseColor("#000000")); // black;
-                        } else if (trackerCount < 12) {
-                            ((TextView) child).setTextColor(Color.parseColor("#FFFFFF")); // white;
-                        } else { // >= 12
-                            String textColor = Start.gameList.get((pageNumber * doorsPerPage) + doorIndex).color;
-                            ((TextView) child).setTextColor(Color.parseColor(colorList.get(Integer.parseInt(textColor))));
-                        }
-
-                        boolean changeColor = true;
-                        String doorStyle = "";
-                        if (country.equals("Romania") || country.equals("Sudan") || country.equals("Malaysia")|| country.equals("Iraq")) {                            doorStyle = "_inprocess";
+                        if (country.equals("Romania") || country.equals("Sudan") || country.equals("Malaysia") || country.equals("Iraq")) {
+                            doorStyle = "_inprocess";
+                            ((TextView) child).setTextColor(Color.parseColor("#FFFFFF"));
                         } else if (trackerCount > 0 && trackerCount < 12) {
                             doorStyle = "_inprocess";
+                            ((TextView) child).setTextColor(Color.parseColor("#FFFFFF"));
                         } else if (trackerCount >= 12) {
                             doorStyle = "_mastery";
-                            changeColor = false;
+                            ((TextView) child).setTextColor(Color.parseColor("#000000"));
                         } else { // 0
-                            doorStyle = "";
+                            doorStyle = ""; // Default circle
+                            ((TextView) child).setTextColor(Color.parseColor("#FFFFFF"));
                         }
-
-                        String drawableBase = "zz_door";
-
-                        String drawableEntryName = drawableBase + doorStyle;
-
-                        int resId = getResources().getIdentifier(drawableEntryName, "drawable", getPackageName());
-                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, resId);
-                        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-                        if (changeColor) {
-                            DrawableCompat.setTint(wrappedDrawable, Color.parseColor(colorList.get(
-                                    Integer.parseInt(Start.gameList.get((pageNumber * doorsPerPage)
-                                            + doorIndex).color))));
-                        }
-                        ((TextView) child).setBackground(wrappedDrawable);
-                        ((TextView) child).setVisibility(View.VISIBLE);
-
                     }
-                } catch (Throwable ex)    // Never reached if tags are well formed!
-                {
+
+                    // 2. Build the drawable name and apply the background
+                    String drawableBase = "zz_door";
+                    String drawableEntryName = drawableBase + doorStyle;
+                    int resId = getResources().getIdentifier(drawableEntryName, "drawable", getPackageName());
+                    ((TextView) child).setBackgroundResource(resId);
+
+                    // 3. Make sure the door is visible
+                    ((TextView) child).setVisibility(View.VISIBLE);
+
+                    // ========== END OF CONSOLIDATED LOGIC ==========
+
+                } catch (Throwable ex) {
                     ex.printStackTrace();
                 }
             }
         }
 
+        // This part for the arrows is correct, leave it as is
         ImageView backArrow = findViewById(R.id.goBack);
         if (pageNumber == 0) {
-            backArrow.setVisibility(View.INVISIBLE);
+            backArrow.setImageResource(R.drawable.zz_backward_inactive);
+            backArrow.setClickable(false);
         } else {
-            backArrow.setVisibility(View.VISIBLE);
+            backArrow.setImageResource(R.drawable.zz_backward);
+            backArrow.setClickable(true);
         }
 
         ImageView forwardArrow = findViewById(R.id.goForward);
         if (((pageNumber + 1) * doorsPerPage) < Start.gameList.size()) {
-            forwardArrow.setVisibility(View.VISIBLE);
+            forwardArrow.setImageResource(R.drawable.zz_forward);
+            forwardArrow.setClickable(true);
         } else {
-            forwardArrow.setVisibility(View.INVISIBLE);
+            forwardArrow.setImageResource(R.drawable.zz_forward_inactive);
+            forwardArrow.setClickable(false);
         }
-
     }
-
     public void goToAboutPage(View view) {
 
         Intent intent = getIntent();
@@ -387,6 +383,35 @@ public class Earth extends AppCompatActivity {
         for (int i = 0; i < parentLayout.getChildCount(); i++) {
             View child = parentLayout.getChildAt(i);
             child.setClickable(true);
+        }
+    }
+
+    // In GameActivity.java, add this entire method
+    protected void updateScore(int pointsIncrease) {
+        if (pointsIncrease > 0) {
+            try {
+                // Get the shared preferences file using the context of this activity
+                SharedPreferences prefs = getSharedPreferences(ChoosePlayer.SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+
+                // Create the exact key for the current player's score
+                // The 'playerString' variable is available in GameActivity
+                String playerGlobalPointsKey = "storedPoints_player" + playerString;
+
+                // READ the old score, ADD the new points, and CALCULATE the new total
+                int oldGlobalPoints = prefs.getInt(playerGlobalPointsKey, 0);
+                int newTotalGlobalPoints = oldGlobalPoints + pointsIncrease;
+
+                // SAVE the new total back to the same key
+                editor.putInt(playerGlobalPointsKey, newTotalGlobalPoints);
+                editor.apply();
+
+                // Also update the temporary globalPoints variable for this session
+                globalPoints = newTotalGlobalPoints;
+                getIntent().putExtra("globalPoints", globalPoints);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

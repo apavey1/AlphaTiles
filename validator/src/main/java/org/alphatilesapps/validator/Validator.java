@@ -3,6 +3,7 @@ package org.alphatilesapps.validator;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.auth.oauth2.TokenResponseException;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -2526,42 +2527,57 @@ public class Validator {
      */
     private void buildServices(String driveFolderId) throws GeneralSecurityException, IOException {
 
-        // initially builds the drive and sheets service not knowing if the token is revoked/expired
         String APPLICATION_NAME = "Alpha Tiles Validator";
         JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
         NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+        // Wrap credentials so we can inject timeouts for every request
+        HttpRequestInitializer timeoutInitializer = request -> {
+            getCrdntls(HTTP_TRANSPORT).initialize(request);
+            request.setConnectTimeout(0);   // 0 = unlimited
+            request.setReadTimeout(0);      // 0 = unlimited
+            // OR if you prefer finite:
+            // request.setConnectTimeout(3 * 60 * 1000); // 3 minutes
+            // request.setReadTimeout(3 * 60 * 1000);
+        };
+
         sheetsService =
-                new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCrdntls(HTTP_TRANSPORT))
+                new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, timeoutInitializer)
                         .setApplicationName(APPLICATION_NAME)
                         .build();
+
         driveService =
-                new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCrdntls(HTTP_TRANSPORT))
+                new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, timeoutInitializer)
                         .setApplicationName(APPLICATION_NAME)
                         .build();
-        // tries to use the drive service to check if the token is revoked or expired
+
+        // Test whether the token is valid
         try {
             driveService.files().get(driveFolderId).execute();
         }
-        // if the token is revoked or expired, deletes the token and then rebuilds the services
         catch (TokenResponseException | GoogleJsonResponseException e) {
             boolean badToken = false;
+
             if (e instanceof TokenResponseException) {
                 badToken = true;
             } else {
-                String errorDescription = ((GoogleJsonResponseException) e).getDetails().get("message").toString();
-                if (errorDescription.contains("Request had invalid authentication credentials. Expected OAuth 2 access token")) {
+                String errorDescription =
+                        ((GoogleJsonResponseException) e).getDetails().get("message").toString();
+                if (errorDescription.contains("Request had invalid authentication credentials.")) {
                     badToken = true;
                 }
             }
 
             if (badToken) {
                 deleteDirectory(Paths.get("tokens"));
+
+                // Recreate services after deleting token — again using timeout initializer
                 sheetsService =
-                        new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCrdntls(HTTP_TRANSPORT))
+                        new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, timeoutInitializer)
                                 .setApplicationName(APPLICATION_NAME)
                                 .build();
                 driveService =
-                        new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCrdntls(HTTP_TRANSPORT))
+                        new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, timeoutInitializer)
                                 .setApplicationName(APPLICATION_NAME)
                                 .build();
             }

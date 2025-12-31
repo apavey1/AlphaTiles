@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -645,8 +646,36 @@ public class Thailand extends GameActivity {
         return tileToReturn;
     }
 
+    // In Thailand.java
+
     public void onChoiceClick(View view) {
-        respondToSelection(Integer.parseInt((String) view.getTag())); // KP
+        // If the choice type is not WORD_IMAGE, or if audio is already playing,
+        // use the old logic without playing extra audio.
+        if (!choiceType.equals("WORD_IMAGE") || mediaPlayerIsPlaying) {
+            respondToSelection(Integer.parseInt((String) view.getTag()));
+            return;
+        }
+
+        // It IS a WORD_IMAGE, so we play the audio first.
+        final int justClickedItem = Integer.parseInt((String) view.getTag());
+        int choiceIndex = justClickedItem - 1; // Convert to 0-based index
+
+        // Make sure we have valid choices before proceeding
+        if (fourWordChoices == null || choiceIndex >= fourWordChoices.size()) {
+            Log.e("Thailand", "Word choices are not available or index is out of bounds.");
+            return; // Avoid a crash
+        }
+
+        // Get the Word object for the tapped image
+        Start.Word tappedWord = fourWordChoices.get(choiceIndex);
+
+        // Call the new method from GameActivity to play the audio.
+        // The logic to check the answer is now inside the onComplete runnable.
+        playWordAudio(tappedWord, () -> {
+            // This code will run AFTER the audio for the tapped word is finished.
+            // Now, we can safely check the answer.
+            respondToSelection(justClickedItem);
+        });
     }
 
     public void onRefClick(View view) {

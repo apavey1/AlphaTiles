@@ -12,6 +12,13 @@ run {
     timeout = Duration.ofMinutes(25)
 }
 
+tasks.register("runDebug", JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = tasks.named("run").get().mainClass
+    args "--debug"
+    jvmArgs "-Dvalidator.debug=true"
+}
+
 tasks.withType(JavaCompile) {
     options.compilerArgs += ['-Xlint:unchecked']
 }

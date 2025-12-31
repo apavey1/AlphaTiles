@@ -15,22 +15,24 @@
         android:layout_height="0dp"
         android:contentDescription="@string/playerAvatar"
         android:rotationY="0"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH0"
+        android:onClick="goBackToChoosePlayer"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHX2"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV9"
+        app:layout_constraintStart_toEndOf="@+id/logoImage"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHX"
         app:srcCompat="@drawable/zz_avatar01" />
 
     <TextView
         android:id="@+id/avatarName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#2196F3"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:maxLines="1"
-        android:padding="2dp"
+        android:padding="5dp"
         android:text="avatar name"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="20sp"
         app:autoSizeStepGranularity="2sp"
@@ -41,30 +43,19 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
 
     <ImageView
-        android:id="@+id/changeAvatarImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:contentDescription="@string/home"
-        android:onClick="goBackToChoosePlayer"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH0"
-        app:srcCompat="@drawable/zz_change_avatar" />
-
-    <ImageView
         android:id="@+id/goBack"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:gravity="center"
         android:contentDescription="@string/goBackward"
         android:onClick="goBackward"
         android:rotationY="0"
-        android:src="@drawable/zz_backward_green"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+        android:src="@drawable/zz_backward"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintEnd_toStartOf="@+id/bottomMiddleSpacer"
         app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1" />
 
 
     <TextView
@@ -80,15 +71,16 @@
         android:tag="1"
         android:text="1"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
 
     <TextView
         android:id="@+id/textDoor002"
@@ -103,15 +95,16 @@
         android:tag="2"
         android:text="2"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
 
     <TextView
         android:id="@+id/textDoor003"
@@ -126,15 +119,16 @@
         android:tag="3"
         android:text="3"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
 
     <TextView
         android:id="@+id/textDoor004"
@@ -149,15 +143,16 @@
         android:tag="4"
         android:text="4"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
 
     <TextView
         android:id="@+id/textDoor005"
@@ -172,15 +167,19 @@
         android:tag="5"
         android:text="5"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH0" />
+
+
+    <!-- ############ ROW 2 ############ -->
 
     <TextView
         android:id="@+id/textDoor006"
@@ -195,15 +194,16 @@
         android:tag="6"
         android:text="6"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
 
     <TextView
         android:id="@+id/textDoor007"
@@ -218,15 +218,16 @@
         android:tag="7"
         android:text="7"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
 
     <TextView
         android:id="@+id/textDoor008"
@@ -241,15 +242,16 @@
         android:tag="8"
         android:text="8"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
 
     <TextView
         android:id="@+id/textDoor009"
@@ -264,16 +266,18 @@
         android:tag="9"
         android:text="9"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
 
+    <!-- textDoor010 moved up -->
     <TextView
         android:id="@+id/textDoor010"
         android:layout_width="0dp"
@@ -287,15 +291,19 @@
         android:tag="10"
         android:text="10"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH2" />
+
+
+    <!-- ############ ROW 3 ############ -->
 
     <TextView
         android:id="@+id/textDoor011"
@@ -310,15 +318,16 @@
         android:tag="11"
         android:text="11"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
     <TextView
         android:id="@+id/textDoor012"
@@ -333,15 +342,16 @@
         android:tag="12"
         android:text="12"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
     <TextView
         android:id="@+id/textDoor013"
@@ -356,15 +366,16 @@
         android:tag="13"
         android:text="13"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
     <TextView
         android:id="@+id/textDoor014"
@@ -379,16 +390,18 @@
         android:tag="14"
         android:text="14"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
+    <!-- textDoor015 moved up -->
     <TextView
         android:id="@+id/textDoor015"
         android:layout_width="0dp"
@@ -402,15 +415,19 @@
         android:tag="15"
         android:text="15"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
+
+
+    <!-- ############ ROW 4 ############ -->
 
     <TextView
         android:id="@+id/textDoor016"
@@ -425,15 +442,16 @@
         android:tag="16"
         android:text="16"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
 
     <TextView
         android:id="@+id/textDoor017"
@@ -448,15 +466,16 @@
         android:tag="17"
         android:text="17"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
 
     <TextView
         android:id="@+id/textDoor018"
@@ -471,15 +490,16 @@
         android:tag="18"
         android:text="18"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
 
     <TextView
         android:id="@+id/textDoor019"
@@ -494,16 +514,18 @@
         android:tag="19"
         android:text="19"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
 
+    <!-- textDoor020 moved up -->
     <TextView
         android:id="@+id/textDoor020"
         android:layout_width="0dp"
@@ -517,15 +539,19 @@
         android:tag="20"
         android:text="20"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6" />
+
+
+    <!-- ############ ROW 5 ############ -->
 
     <TextView
         android:id="@+id/textDoor021"
@@ -540,15 +566,16 @@
         android:tag="21"
         android:text="21"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
 
     <TextView
         android:id="@+id/textDoor022"
@@ -563,15 +590,16 @@
         android:tag="22"
         android:text="22"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
 
     <TextView
         android:id="@+id/textDoor023"
@@ -586,15 +614,16 @@
         android:tag="23"
         android:text="23"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
 
     <TextView
         android:id="@+id/textDoor024"
@@ -609,16 +638,18 @@
         android:tag="24"
         android:text="24"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
 
+    <!-- textDoor025 moved up -->
     <TextView
         android:id="@+id/textDoor025"
         android:layout_width="0dp"
@@ -632,15 +663,19 @@
         android:tag="25"
         android:text="25"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH9"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH8" />
+
+
+    <!-- ############ ROW 6 ############ -->
 
     <TextView
         android:id="@+id/textDoor026"
@@ -655,15 +690,16 @@
         android:tag="26"
         android:text="26"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
 
     <TextView
         android:id="@+id/textDoor027"
@@ -678,15 +714,16 @@
         android:tag="27"
         android:text="27"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
 
     <TextView
         android:id="@+id/textDoor028"
@@ -701,15 +738,16 @@
         android:tag="28"
         android:text="28"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
 
     <TextView
         android:id="@+id/textDoor029"
@@ -724,16 +762,18 @@
         android:tag="29"
         android:text="29"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
 
+    <!-- textDoor030 moved up -->
     <TextView
         android:id="@+id/textDoor030"
         android:layout_width="0dp"
@@ -747,15 +787,19 @@
         android:tag="30"
         android:text="30"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH15"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH11"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH14" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH10" />
+
+
+    <!-- ############ ROW 7 ############ -->
 
     <TextView
         android:id="@+id/textDoor031"
@@ -770,15 +814,16 @@
         android:tag="31"
         android:text="31"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH15"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH14" />
+        app:layout_constraintEnd_toEndOf="@+id/guidelineV1"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV0"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
 
     <TextView
         android:id="@+id/textDoor032"
@@ -793,15 +838,16 @@
         android:tag="32"
         android:text="32"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH15"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH14" />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
 
     <TextView
         android:id="@+id/textDoor033"
@@ -816,16 +862,74 @@
         android:tag="33"
         android:text="33"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="40sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH15"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+
+    <TextView
+        android:id="@+id/textDoor034"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/zz_door"
+        android:contentDescription="@string/door033"
+        android:gravity="center"
+        android:maxLines="1"
+        android:onClick="goToDoor"
+        android:padding="4dp"
+        android:tag="34"
+        android:text="34"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="40sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toStartOf="@+id/guidelineV7"
         app:layout_constraintStart_toStartOf="@+id/guidelineV6"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH14" />
+        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
 
+    <TextView
+        android:id="@+id/textDoor035"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/zz_door"
+        android:contentDescription="@string/door033"
+        android:gravity="center"
+        android:maxLines="1"
+        android:onClick="goToDoor"
+        android:padding="4dp"
+        android:tag="35"
+        android:text="35"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="40sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH13"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV9"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH12" />
+
+    <TextView
+        android:id="@+id/bottomMiddleSpacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="BMS"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintEnd_toStartOf="@+id/goForward"
+        app:layout_constraintStart_toEndOf="@+id/goBack"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"/>
 
     <ImageView
         android:id="@+id/goForward"
@@ -834,12 +938,12 @@
         android:contentDescription="@string/goForward"
         android:onClick="goForward"
         android:rotationY="0"
-        android:src="@drawable/zz_forward_green"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH15"
+        android:src="@drawable/zz_forward"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV8"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH14" />
+        app:layout_constraintStart_toEndOf="@+id/bottomMiddleSpacer"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1" />
 
     <ImageView
         android:id="@+id/pointsImage"
@@ -847,9 +951,9 @@
         android:layout_height="0dp"
         android:contentDescription="@string/pointsImage"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
-        app:layout_constraintEnd_toStartOf="@+id/bottomResourcesSpacer"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHX2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHX"
+        app:layout_constraintEnd_toStartOf="@+id/logoImage"
         app:layout_constraintStart_toStartOf="@+id/guidelineV0"
         app:srcCompat="@drawable/zz_pointsscored" />
 
@@ -862,15 +966,15 @@
         android:padding="7dp"
         android:text="@string/pointsScored"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textStyle="bold|normal"
         app:autoSizeMaxTextSize="25sp"
         app:autoSizeMinTextSize="5sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintDimensionRatio="1"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHX2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHX"
         app:layout_constraintEnd_toEndOf="@+id/pointsImage"
         app:layout_constraintStart_toStartOf="@+id/pointsImage"/>
 
@@ -933,141 +1037,144 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"/>
 
     <ImageView
-        android:id="@+id/share"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:onClick="goToShare"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
-        app:layout_constraintEnd_toEndOf="@+id/bottomShareSpacer"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/bottomShareSpacer"
-        app:srcCompat="@drawable/zz_share" />
-
-    <ImageView
         android:id="@+id/logoImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/clickLogoGoToAbout"
         android:onClick="goToAboutPage"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
-        app:layout_constraintEnd_toEndOf="@+id/guidelineV9"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHX2"
+        app:layout_constraintEnd_toStartOf="@+id/activePlayerImage"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bottomShareSpacer"
+        app:layout_constraintStart_toEndOf="@+id/pointsImage"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHX"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/zz_alphatileslogosmall" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHX2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.16" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
+        app:layout_constraintGuide_percent="0.2557" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.13" />
+        app:layout_constraintGuide_percent="0.2657" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.23" />
+        app:layout_constraintGuide_percent="0.3614" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.3714" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34" />
+        app:layout_constraintGuide_percent="0.4671" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.4771" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
+        app:layout_constraintGuide_percent="0.5728" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.46" />
+        app:layout_constraintGuide_percent="0.5828" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.56" />
+        app:layout_constraintGuide_percent="0.6785" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.57" />
+        app:layout_constraintGuide_percent="0.6885" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.67" />
+        app:layout_constraintGuide_percent="0.7842" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.7942" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.78" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.79" />
+        app:layout_constraintGuide_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.89" />
+        app:layout_constraintGuide_percent="0.97" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHSys1"
@@ -1088,69 +1195,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.17" />
+        app:layout_constraintGuide_percent="0.212" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2075" />
+        app:layout_constraintGuide_percent="0.2345" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3775" />
+        app:layout_constraintGuide_percent="0.3965" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.415" />
+        app:layout_constraintGuide_percent="0.419" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.585" />
+        app:layout_constraintGuide_percent="0.581" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6225" />
+        app:layout_constraintGuide_percent="0.6035" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.7975" />
+        app:layout_constraintGuide_percent="0.7655" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.83" />
+        app:layout_constraintGuide_percent="0.788" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.99" />
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

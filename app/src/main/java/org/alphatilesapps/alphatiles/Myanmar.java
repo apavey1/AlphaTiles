@@ -237,8 +237,8 @@ public class Myanmar extends GameActivity {
             }
         }
     }
-
     public void resetBoard() {
+        // 1. Reset the grid buttons
         for (int i : GAME_BUTTONS) {
             TextView tile = findViewById(i);
             tile.setText("");
@@ -246,10 +246,19 @@ public class Myanmar extends GameActivity {
             tile.setTextColor(Color.parseColor("#000000")); // black
         }
 
+        // 2. Clear the internal board logic
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 7; y++) {
                 tilesBoard[x][y] = null;
             }
+        }
+
+        // 3. Reset the "Active Word" display box
+        TextView activeWordTextView = findViewById(R.id.activeWordTextView);
+        if (activeWordTextView != null) {
+            // Set this to "" (empty) or getString(R.string.boxToBuildTargetWordIn) if you want instructions to appear
+            activeWordTextView.setText("");
+            activeWordTextView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -352,7 +361,7 @@ public class Myanmar extends GameActivity {
                     }
 
                     ImageView image = findViewById(WORD_IMAGES[w]);
-                    int resID = getResources().getIdentifier(sevenWords[w].wordInLWC + "2", "drawable", getPackageName());
+                    int resID = getResources().getIdentifier(sevenWords[w].wordInLWC, "drawable", getPackageName());
                     image.setImageResource(resID);
                     image.setVisibility(View.VISIBLE);
                     image.setClickable(true);
@@ -606,7 +615,19 @@ public class Myanmar extends GameActivity {
             wordsCompleted++;
 
             TextView activeWord = findViewById(R.id.activeWordTextView);
-            activeWord.setText(displayWord);
+
+            // --- FIX START: Force Visibility and Color ---
+            activeWord.setVisibility(View.VISIBLE);
+            activeWord.setTextColor(Color.parseColor("#000000")); // Force black text
+            activeWord.setElevation(100f); // Ensure it sits on top
+
+            if (displayWord != null && !displayWord.isEmpty()) {
+                activeWord.setText(displayWord);
+            } else {
+                // Fallback: If calculation failed, use the word object directly
+                activeWord.setText(sevenWords[indexOfFoundWord].wordInLOP);
+            }
+            // --- FIX END ---
 
             // Color the tiles in the found word
             int tileX;
@@ -638,7 +659,9 @@ public class Myanmar extends GameActivity {
                 updatePointsAndTrackers(wordsCompleted);
             }
             playCorrectSoundThenActiveWordClip(wordsCompleted == completionGoal);
+
             handler = new Handler(Looper.getMainLooper());
+            // Note: Check clearImageFromImageBank to ensure it doesn't call resetBoard() immediately
             handler.postDelayed(clearImageFromImageBank(indexOfFoundWord), Long.valueOf(refWord.duration + correctSoundDuration));
 
         } else { // Word not found

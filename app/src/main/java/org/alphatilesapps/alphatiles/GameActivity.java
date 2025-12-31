@@ -10,13 +10,14 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import androidx.annotation.Nullable;
+import android.util.Log;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
@@ -299,6 +300,10 @@ public abstract class GameActivity extends AppCompatActivity {
                     hasChecked12Trackers);
             editor.apply();
             editor.putInt(uniqueGameLevelPlayerModeStageID + "_trackerCount", trackerCount);
+            editor.putInt(uniqueGameLevelPlayerModeStageID + "_points", points);
+            editor.putBoolean(uniqueGameLevelPlayerModeStageID + "_hasChecked12Trackers", hasChecked12Trackers);
+            editor.putInt(uniqueGameLevelPlayerModeStageID + "_trackerCount", trackerCount);
+            editor.putInt("storedPoints_player" + playerString, globalPoints);
             editor.apply();
             getIntent().putExtra("globalPoints", globalPoints);
 
@@ -409,7 +414,7 @@ public abstract class GameActivity extends AppCompatActivity {
                             finish();
                         }
                     }
-                }, 4500);
+                }, 5000);
             }
         }
     }
@@ -1213,5 +1218,43 @@ public abstract class GameActivity extends AppCompatActivity {
         ArrayList<Start.Tile> tilesInWordSpelledCorrectly = tileList.parseWordIntoTiles(wordListWord.wordInLOP, wordListWord);
         return combineTilesToMakeWord(tilesInWordSpelledCorrectly, wordListWord, -1);
     }
+    protected void playWordAudio(Start.Word wordObject, @Nullable Runnable onComplete) {
+        if (wordObject == null || mediaPlayerIsPlaying) {
+            if (onComplete != null) {
+                // CORRECTED COMMENT:
+                // Run the callback immediately if we can't play audio
+                onComplete.run();
+            }
+            return;
+        }
+
+        int resID = getResources().getIdentifier(wordObject.wordInLWC, "raw", getPackageName());
+
+        if (resID == 0) {
+           Log.e("GameActivity", "Audio file not found for word: " + wordObject.wordInLWC);
+            if (onComplete != null) {
+                onComplete.run();
+            }
+            return;
+        }
+
+        setAllGameButtonsUnclickable();
+        setOptionsRowUnclickable();
+        mediaPlayerIsPlaying = true;
+
+        final MediaPlayer mp = MediaPlayer.create(this, resID);
+        mp.setOnCompletionListener(mediaPlayer -> {
+            mediaPlayerIsPlaying = false;
+            setAllGameButtonsClickable();
+            setOptionsRowClickable();
+            mp.release();
+
+            if (onComplete != null) {
+                onComplete.run();
+            }
+        });
+        mp.start();
+    }
+
 
 }

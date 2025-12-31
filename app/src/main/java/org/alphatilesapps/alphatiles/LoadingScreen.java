@@ -76,13 +76,6 @@ public class LoadingScreen extends AppCompatActivity {
         }
         context = this;
 
-        TextView gameNameView = findViewById(R.id.gameName);
-        String localAppName = langInfoList.find("Game Name");
-        gameNameView.setText(localAppName);
-
-        TextView langPackNameView = findViewById(R.id.langPackName);
-        langPackNameView.setText(BuildConfig.FLAVOR);
-
         TextView versionNoView = findViewById(R.id.versionNo);
         versionNoView.setText(BuildConfig.VERSION_NAME);
 
@@ -190,7 +183,6 @@ public class LoadingScreen extends AppCompatActivity {
     }
 
     public void loadWordAudio() {
-        // load speech sounds
         Resources res = context.getResources();
         wordAudioIDs = new HashMap<>();
 
@@ -198,13 +190,28 @@ public class LoadingScreen extends AppCompatActivity {
         for (Start.Word word : wordList) {
             if (enhancedAudioLoadingLog) {
                 i++;
-                LOGGER.info("LoadProgress: next task: load word audio " + i + " of " + wordList.size() + ": " + word.wordInLWC + " (" + word.wordInLOP + ")");
+                LOGGER.info("LoadProgress: next task: load word audio " + i + " of " + wordList.size() + ": " + word.wordInLWC);
             }
-            int resId = res.getIdentifier(word.wordInLWC, "raw", context.getPackageName());
+
+            // Only take the first column (before first comma)
+            String audioName = word.wordInLWC.split(",")[0].trim().toLowerCase().replace(" ", "_");
+            int resId = res.getIdentifier(audioName, "raw", context.getPackageName());
+
+            if (resId == 0) {
+                LOGGER.warning("Missing audio file: " + audioName + " (Resource ID = 0), skipping load");
+                totalAudio--; // decrement if you are tracking total sounds
+                continue;
+            }
+
             int duration = getAssetDuration(resId) + 100;
-            wordAudioIDs.put(word.wordInLWC, gameSounds.load(context, resId, 1));
+            wordAudioIDs.put(audioName, gameSounds.load(context, resId, 1));
             word.duration = duration;
+
+            if (enhancedAudioLoadingLog) {
+                LOGGER.info("Loaded audio for: " + audioName + " (duration: " + duration + " ms)");
+            }
         }
+
         LOGGER.info("LoadProgress: completed loadWordAudio()");
     }
 
@@ -218,13 +225,23 @@ public class LoadingScreen extends AppCompatActivity {
                 i++;
                 LOGGER.info("LoadProgress: next task: load syllable audio " + i + " of " + syllableList.size() + ": " + syllable.text + " (" + syllable.audioName + ")");
             }
+
             int resId = res.getIdentifier(syllable.audioName, "raw", context.getPackageName());
+
+            if (resId == 0) {
+                LOGGER.warning("Missing syllable audio: " + syllable.audioName + " (Resource ID = 0), skipping load");
+                totalAudio--;
+                continue;
+            }
+
             int duration = getAssetDuration(resId) + 100;
             syllableAudioIDs.put(syllable.audioName, gameSounds.load(context, resId, 2));
             syllable.duration = duration;
         }
+
         LOGGER.info("LoadProgress: completed loadSyllableAudio()");
     }
+
 
     public void loadTileAudio() {
         Resources res = context.getResources();
@@ -237,16 +254,25 @@ public class LoadingScreen extends AppCompatActivity {
                 i++;
                 LOGGER.info("LoadProgress: next task: load tile audio " + i + " of " + tileList.size() + ": " + tile.text + " (" + tile.audioName + ")");
             }
-            if(!tile.audioForThisTileType.equals("zz_no_audio_needed")) {
+
+            if (!tile.audioForThisTileType.equals("zz_no_audio_needed")) {
                 int resId = res.getIdentifier(tile.audioForThisTileType, "raw", context.getPackageName());
+
+                if (resId == 0) {
+                    // Missing audio file, log and decrement totalAudio
+                    LOGGER.warning("Missing tile audio: " + tile.audioForThisTileType + ", skipping load");
+                    totalAudio--;
+                    continue;
+                }
+
                 int duration = getAssetDuration(resId) + 100;
                 tileAudioIDs.put(tile.audioForThisTileType, gameSounds.load(context, resId, 2));
                 tileDurations.put(tile.audioForThisTileType, duration);
             } else {
                 totalAudio--;
             }
-
         }
+
         LOGGER.info("LoadProgress: completed loadTileAudio()");
     }
 

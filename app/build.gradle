@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+// apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk = 36
@@ -44,10 +44,10 @@ android {
         //Alpha Tiles internal team developers can find active product flavor definitions here:
         // https://docs.google.com/document/d/1a3satcmHFa5r6l7THrKLgxSWVCs-Mp2yOGyzk4oETsk/edit
 
-        tpxTeocuitlapa {
+        tonTongan {
             dimension "language"
-            applicationIdSuffix ".blue.tpxTeocuitlapa"
-            resValue "string", "app_name", 'Mu̱ꞌtsíin meꞌphaa (tpxTEO)'
+            applicationIdSuffix ".blue.tonTongan"
+            resValue "string", "app_name", 'Ako Sipela'
         }
     }
     namespace 'org.alphatilesapps.alphatiles'
@@ -63,8 +63,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'com.google.zxing:core:3.5.3'
     implementation 'com.google.android.material:material:1.13.0'
-    implementation platform('com.google.firebase:firebase-bom:33.16.0')
-    implementation 'com.google.firebase:firebase-analytics'
+    // implementation platform('com.google.firebase:firebase-bom:33.16.0')
+    // implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.segment.analytics.android:analytics:4.11.3'
     implementation 'androidx.core:core:1.17.0'
     testImplementation 'androidx.test.ext:junit:1.3.0'

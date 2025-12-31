@@ -174,7 +174,7 @@ public class China extends GameActivity {
             tiles.addAll(tileList.parseWordIntoTilesPreliminary(threeFourTileWords.get(t).wordInLOP, threeFourTileWords.get(t)));
 
             ImageView image = findViewById(WORD_IMAGES[t]);
-            int resID = getResources().getIdentifier(threeFourTileWords.get(t).wordInLWC + "2", "drawable", getPackageName());
+            int resID = getResources().getIdentifier(threeFourTileWords.get(t).wordInLWC, "drawable", getPackageName());
             image.setImageResource(resID);
             image.setVisibility(View.VISIBLE);
         }
@@ -182,7 +182,7 @@ public class China extends GameActivity {
         Collections.shuffle(tiles);
 
         ImageView image = findViewById(WORD_IMAGES[3]);
-        int resID = getResources().getIdentifier(oneThreeTileWord.wordInLWC + "2", "drawable", getPackageName());
+        int resID = getResources().getIdentifier(oneThreeTileWord.wordInLWC, "drawable", getPackageName());
         image.setImageResource(resID);
         image.setVisibility(View.VISIBLE);
 
