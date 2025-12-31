@@ -174,19 +174,14 @@ public class Earth extends AppCompatActivity {
                         continue; // Skip doors that don't correspond to a game
                     }
 
-                    // ========== START OF CONSOLIDATED LOGIC ==========
-
                     int absoluteGameNumber = (pageNumber * doorsPerPage) + doorIndex + 1;
                     String doorStyle;
 
-                    // 1. Decide the style based on the game type (tutorial vs. normal)
                     if (absoluteGameNumber >= 1 && absoluteGameNumber <= 3) {
-                        // This is a TUTORIAL door
-                        doorStyle = "_tutorial"; // Will build "zz_door_tutorial"
+                        doorStyle = "_tutorial";
                         ((TextView) child).setTextColor(Color.parseColor("#000000")); // SET TEXT TO BLACK
 
                     } else {
-                        // This is a NORMAL door, use the completion logic
                         String country = Start.gameList.get((pageNumber * doorsPerPage) + doorIndex).country;
                         String challengeLevel = Start.gameList.get((pageNumber * doorsPerPage) + doorIndex).level;
                         String syllableGame = gameList.get((pageNumber * doorsPerPage) + doorIndex).mode;
@@ -215,16 +210,12 @@ public class Earth extends AppCompatActivity {
                         }
                     }
 
-                    // 2. Build the drawable name and apply the background
                     String drawableBase = "zz_door";
                     String drawableEntryName = drawableBase + doorStyle;
                     int resId = getResources().getIdentifier(drawableEntryName, "drawable", getPackageName());
                     ((TextView) child).setBackgroundResource(resId);
 
-                    // 3. Make sure the door is visible
                     ((TextView) child).setVisibility(View.VISIBLE);
-
-                    // ========== END OF CONSOLIDATED LOGIC ==========
 
                 } catch (Throwable ex) {
                     ex.printStackTrace();
@@ -386,27 +377,20 @@ public class Earth extends AppCompatActivity {
         }
     }
 
-    // In GameActivity.java, add this entire method
     protected void updateScore(int pointsIncrease) {
         if (pointsIncrease > 0) {
             try {
-                // Get the shared preferences file using the context of this activity
                 SharedPreferences prefs = getSharedPreferences(ChoosePlayer.SHARED_PREFS, MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
-                // Create the exact key for the current player's score
-                // The 'playerString' variable is available in GameActivity
                 String playerGlobalPointsKey = "storedPoints_player" + playerString;
 
-                // READ the old score, ADD the new points, and CALCULATE the new total
                 int oldGlobalPoints = prefs.getInt(playerGlobalPointsKey, 0);
                 int newTotalGlobalPoints = oldGlobalPoints + pointsIncrease;
 
-                // SAVE the new total back to the same key
                 editor.putInt(playerGlobalPointsKey, newTotalGlobalPoints);
                 editor.apply();
 
-                // Also update the temporary globalPoints variable for this session
                 globalPoints = newTotalGlobalPoints;
                 getIntent().putExtra("globalPoints", globalPoints);
             } catch (Exception e) {
