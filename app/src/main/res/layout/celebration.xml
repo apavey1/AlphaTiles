@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.86" />
+        app:layout_constraintGuide_percent="0.81" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4.5"
@@ -78,13 +78,70 @@
         app:layout_constraintGuide_percent="0.99" />
 
     <ImageView
+        android:id="@+id/backwardArrowImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@+id/backwardPageArrow"
+        android:onClick="replayLevel"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintEnd_toStartOf="@+id/bottomGamesHomeSpacer"
+        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/zz_replay" />
+
+    <TextView
+        android:id="@+id/bottomGamesHomeSpacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="BGHS"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintEnd_toStartOf="@+id/bottomInstructionsSpacer"
+        app:layout_constraintStart_toEndOf="@+id/backwardArrowImage"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"/>
+
+    <ImageView
         android:id="@+id/gamesHomeImage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="goBackToEarth"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintStart_toStartOf="@+id/bottomGamesHomeSpacer"
+        app:layout_constraintEnd_toEndOf="@+id/bottomInstructionsSpacer"
         app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
-        app:layout_constraintBottom_toBottomOf="@+id/guidelineHSys2"
+        android:contentDescription="@+id/gamesHomeImage"
         app:srcCompat="@drawable/zz_games_home" />
+
+    <TextView
+        android:id="@+id/bottomInstructionsSpacer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="BIS"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintEnd_toStartOf="@+id/forwardArrowImage"
+        app:layout_constraintStart_toEndOf="@+id/bottomGamesHomeSpacer"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"/>
+
+    <ImageView
+        android:id="@+id/instructions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rotationY="0"
+        app:srcCompat="@drawable/zz_instructions" />
+
+    <ImageView
+        android:id="@+id/forwardArrowImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@+id/forwardPageArrow"
+        android:onClick="goToNextLevel"
+        android:rotationY="0"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHSys2"
+        app:layout_constraintEnd_toEndOf="@id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/bottomInstructionsSpacer"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHSys1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/zz_forward" />
 
     <ImageView
         android:id="@+id/celebrationDoor"

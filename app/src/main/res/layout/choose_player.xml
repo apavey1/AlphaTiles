@@ -446,7 +446,7 @@
         android:rotationY="0"
         app:layout_constraintTop_toTopOf="@+id/guidelineH13"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH14"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV5"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV6"
         app:layout_constraintEnd_toStartOf="@+id/guidelineV6"
         app:srcCompat="@drawable/zz_instructions" />
 
